@@ -2,6 +2,7 @@
 Useful script for execute MySQL request and execute them online from PHP.
 
 1. Open the "script.php" file and write your configuration parameters :
+
 - MySQL Host
 - Database name
 - Database user
