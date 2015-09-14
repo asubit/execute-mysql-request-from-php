@@ -74,8 +74,18 @@
 
 					if ($stmt->execute()) {
 						$results = $stmt->fetchAll();
+						$count = count($results);
+						if ($count == 0) {
 						?>
-						<div class="alert alert-success" role="alert">Requ&ecirc;te &eacute;x&eacute;cut&eacute;e avec succ&egrave;s.<br/><?php echo count($results); ?> r&eacute;sultats &agrave; affich&eacute;s.</div>
+							<div class="alert alert-success" role="alert">Requ&ecirc;te &eacute;x&eacute;cut&eacute;e avec succ&egrave;s.<br/>R&eacute;sultat vide.</div>
+						<?php
+						} else {
+						?>
+							<div class="alert alert-success" role="alert">Requ&ecirc;te &eacute;x&eacute;cut&eacute;e avec succ&egrave;s.<br/><?php echo $count; ?> r&eacute;sultats &agrave; affich&eacute;s.</div>
+						<?php
+						}
+						?>
+						
 					 	<article>
 					 		<table class="table table-striped">
 					 			<tr><th>Ligne</th><th>R&eacute;sultat</th></tr>
