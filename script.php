@@ -10,7 +10,7 @@
 	<body>
 		<div class="container">
 			<?php
-				# Variables à définir
+				# Define parameters here
 				$mysql_host     = "localhost";
 				$mysql_database = "db_name";
 				$mysql_user     = "db_user";
