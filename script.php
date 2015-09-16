@@ -18,6 +18,7 @@
 				$query = '';
 			?>
 			<h1 align="center">Executer du MySQL sur la base "<?php echo $mysql_host; ?>"</h1>
+			"center"><a href="https://github.com/asubit/execute-mysql-request-from-php" target="_blank">https://github.com/asubit/execute-mysql-request-from-php</a></p>
 			<section>
 				<article>
 					<h2>Param&egrave;tres de connexion :</h2>
