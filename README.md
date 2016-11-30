@@ -3,7 +3,7 @@ Useful script for execute SQL request and execute them online from PHP.
 
 ## Installation
 
-1. Download
+### Download
 
 `git clone https://github.com/asubit/execute-mysql-request-from-php.git`
 
@@ -13,13 +13,17 @@ or
 unzip master.zip`
 
 
-2. Open the "script.php" file and write your configuration parameters :
+### Configure
+
+`vi script.php`
+
+Write your specifif configuration parameters for :
   - SQL Host
   - Database name
   - Database user
   - Database user's password
 
-## Usage
+## Use
 
 1. Acces the file from : http://www.your-domain.com/script.php
 
