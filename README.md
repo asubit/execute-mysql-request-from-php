@@ -17,7 +17,7 @@ unzip master.zip`
 
 `vi script.php`
 
-Write your specifif configuration parameters for :
+Write your specific configuration parameters for :
   - SQL Host
   - Database name
   - Database user
