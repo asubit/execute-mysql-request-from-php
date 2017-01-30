@@ -18,26 +18,27 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
+// Define parameters here
+$mysql_host     = "localhost";
+$mysql_database = "db_name";
+$mysql_user     = "db_user";
+$mysql_password = "password";
+$query = '';
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>SAVE MY LIFE</title>
+	<meta charset="utf-8">
+        <title>Execute SQL</title>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	</head>
 	<body>
 		<div class="container">
-			<?php
-				# Define parameters here
-				$mysql_host     = "localhost";
-				$mysql_database = "db_name";
-				$mysql_user     = "db_user";
-				$mysql_password = "password";
-				$query = '';
-			?>
 			<h1 align="center">Executer du MySQL sur la base "<?php echo $mysql_host; ?>"</h1>
 			<p align="center"><a href="https://github.com/asubit/execute-mysql-request-from-php" target="_blank">https://github.com/asubit/execute-mysql-request-from-php</a></p>
 			<section>
