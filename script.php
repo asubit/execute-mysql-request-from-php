@@ -20,11 +20,11 @@ SOFTWARE.
 */
 
 // Define parameters here
-$mysql_host     = "localhost";
-$mysql_database = "db_name";
-$mysql_user     = "db_user";
-$mysql_password = "password";
-$query = '';
+$mysql_host     = "127.0.0.1";
+$mysql_database = "domotelec";
+$mysql_user     = "root";
+$mysql_password = "root";
+$query = ((isset($_POST['sql']))&&(!empty($_POST['sql'])))? $_POST['sql'] : '';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -32,51 +32,69 @@ $query = '';
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta charset="utf-8">
-        <title>Execute SQL</title>
+        <meta charset="utf-8">
+
+        <title>Simple executor SQL</title>
+
 		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	</head>
 	<body>
 		<div class="container">
-			<h1 align="center">Executer du MySQL sur la base "<?php echo $mysql_host; ?>"</h1>
-			<p align="center"><a href="https://github.com/asubit/execute-mysql-request-from-php" target="_blank">https://github.com/asubit/execute-mysql-request-from-php</a></p>
+			<!-- Title -->
+			<h1 align="center">Execute SQL on "<?php echo $mysql_host; ?>" host</h1>
+			<!-- Link to GitHub repository -->
+			<p align="center">
+				<a href="https://github.com/asubit/execute-mysql-request-from-php" target="_blank">https://github.com/asubit/execute-mysql-request-from-php</a>
+			</p>
+
 			<section>
+				<!-- MySQL parameters -->
 				<article>
-					<h2>Param&egrave;tres de connexion :</h2>
+					<h2>Database parameters</h2>
 					<p>
 						<table class="table">
 							<tr>
-								<th>Serveur de base de donn&eacute;es</th>
+								<th>Host</th>
 								<td><?php echo $mysql_host; ?></td>
 							</tr>
 							<tr>
-								<th>Nom de la base de donn&eacute;es</th>
+								<th>Database name</th>
 								<td><?php echo $mysql_database; ?></td>
 							</tr>
 							<tr>
-								<th>Utilisateur MySQL</th>
+								<th>Database user</th>
 								<td><?php echo $mysql_user; ?></td>
 							</tr>
 							<tr>
-								<th>Mot de passe utilisateur</th>
-								<td><?php echo $mysql_password; ?></td>
+								<th>Database password</th>
+								<td>*********</td>
 							</tr>
 						</table>
 					</p>
 				</article>
-				<?php
-					# MySQL avec PDO_MYSQL  
-					try {
-						$db = new PDO("mysql:host=$mysql_host;dbname=$mysql_database", $mysql_user, $mysql_password);
-						?><div class="alert alert-success" role="alert">Connect&eacute;</div><?php
-					} catch (PDOException $e) {
-					    ?><div class="alert alert-danger" role="alert">Connexion &agrave; la base de donn&eacute;es impossible avec les parm&egrave; ci-dessus.<br/><?php $e->getMessage(); ?></div><?php
-					    die();
-					}
+
+				<!-- Test database connection -->
+				<?php 
+				try {
+					$db = new PDO("mysql:host=$mysql_host;dbname=$mysql_database", $mysql_user, $mysql_password);
 				?>
+					<div class="alert alert-success" role="alert">Test database connection : OK</div>
+				<?php
+				} catch (PDOException $e) {
+				?>
+					<div class="alert alert-danger" role="alert">
+						Test database connection : KO<br/>
+						<?php $e->getMessage(); ?>
+					</div>
+					<?php
+					exit;
+				}
+				?>
+
+				<!-- SQL query input box -->
 				<article>
-					<h2>Formulaire de requ&ecirc;te MySQL</h2>
+					<h2>SQL query input box</h2>
 					<p>
 						<form action="" method="post" class="form-horizontal">
 							<div class="form-group"><textarea name="sql" class="form-control"><?php echo $query; ?></textarea></div>
@@ -86,74 +104,54 @@ $query = '';
 				</article>
 			</section>
 			
+			<?php if($query): ?>
+			<!-- There is query text -->
 			<section>
-				<?php
-				//$query = file_get_contents("shop.sql");
-				//$query = 'SELECT * FROM  `Reponse`';
-				if ((isset($_POST['sql']))&&(!empty($_POST['sql']))) {
-
-					$query = $_POST['sql'];
-					$stmt = $db->prepare($query);
-
-					if ($stmt->execute()) {
-						$results = $stmt->fetchAll();
-						$count = count($results);
-						if ($count == 0) {
-						?>
-							<div class="alert alert-success" role="alert">Requ&ecirc;te &eacute;x&eacute;cut&eacute;e avec succ&egrave;s.<br/>R&eacute;sultat vide.</div>
-						<?php
-						} else {
-						?>
-							<div class="alert alert-success" role="alert">Requ&ecirc;te &eacute;x&eacute;cut&eacute;e avec succ&egrave;s.<br/><?php echo $count; ?> r&eacute;sultats &agrave; affich&eacute;s.</div>
-						<?php
-						}
-						?>
-						
-					 	<article>
-					 		<table class="table table-striped">
-					 			<tr><th>Ligne</th><th>R&eacute;sultat</th></tr>
-							 	<?php
-							 	foreach ($results as $key => $value) {
-							 	?>
-						 		<tr>
-						 			<td><?php echo $key; ?></td>
-						 			<td>
-									 	<table>
-									 		<tr><th>Cl&eacute;</th><th>Valeur</th></tr>
-										 	<?php
-										 	foreach ($value as $subkey => $subvalue) {
-										 	?>
-									 		<tr>
-									 			<td><?php echo $subkey; ?></td>
-									 			<td>
-									 				<?php 
-									 				if(empty($subvalue)){
-									 					echo 'NULL';
-									 				}else{
-									 					echo $subvalue;
-									 				} ?>
-									 			</td>
-									 		</tr>
-										 	<?php
-											}
-											?>
-									 	</table>
-						 			</td>
-						 		</tr>
-							 	<?php
-								}
-								?>
-					 		</table>
-						</article>
+				<?php $stmt = $db->prepare($query); ?>
+				<!-- Prepare query text to SQL -->
+				<?php if (!$stmt->execute()): ?>
+					<!-- SQL query can't be execute -->
+					<div class="alert alert-danger" role="alert">
+						SQL query can't be execute.
+					</div>
+				<?php else: ?>
 					<?php
-					}
-					else  {
-					    ?><div class="alert alert-danger" role="alert">Erreur lors de l'&eacute;x&eacute;cution de la requ&ecirc;te.</div><?php
-					}
-				}
-				?>
+					$results = $stmt->fetchAll();
+					$count = count($results);
+					?>
+					<!-- SQL query is execute -->
+					<div class="alert alert-success" role="alert">
+						SQL query is execute.<br/>
+						<?php echo $count; ?> results.
+					</div>
+					<!-- SQL results display -->
+					<table class="table table-striped"">
+						<!-- SQL head -->
+						<thead>
+							<tr>
+								<?php foreach(array_keys($results[0]) as $arrayKey): ?>
+									<?php if(!is_numeric($arrayKey)): ?>
+										<th><?php echo $arrayKey; ?></th>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</tr>
+						</thead>
+						<!-- SQL content -->
+						<tbody>
+							<?php foreach($results as $result): ?>
+								<tr>
+									<?php foreach($result as $key => $value): ?>
+										<?php if(!is_numeric($key)): ?>
+											<td><?php echo $value; ?></td>
+										<?php endif; ?>
+									<?php endforeach; ?>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				<?php endif; ?>
 			</section>
+			<?php endif; ?>
 		</div>
 	</body>
 </html>
-
