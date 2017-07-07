@@ -21,7 +21,7 @@ SOFTWARE.
 
 // Define parameters here
 $mysql_host     = "127.0.0.1";
-$mysql_database = "domotelec";
+$mysql_database = "wordpress";
 $mysql_user     = "root";
 $mysql_password = "root";
 $query = ((isset($_POST['sql']))&&(!empty($_POST['sql'])))? $_POST['sql'] : '';
