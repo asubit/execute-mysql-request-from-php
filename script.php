@@ -45,7 +45,8 @@ $query = ((isset($_POST['sql']))&&(!empty($_POST['sql'])))? $_POST['sql'] : '';
 			<h1 align="center">Execute SQL on "<?php echo $mysql_host; ?>" host</h1>
 			<!-- Link to GitHub repository -->
 			<p align="center">
-				<a href="https://github.com/asubit/execute-mysql-request-from-php" target="_blank">https://github.com/asubit/execute-mysql-request-from-php</a>
+				<a href="https://github.com/asubit/execute-mysql-request-from-php" target="_blank" class="label label-info"><img src="https://assets-cdn.github.com/favicon.ico" alt="Logo Github" width="17" /></a>
+				<a href="https://github.com/asubit/execute-mysql-request-from-php" target="_blank" class="label label-info">Fork me on Github!</a>
 			</p>
 
 			<section>
