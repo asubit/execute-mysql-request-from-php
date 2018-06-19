@@ -9,8 +9,10 @@ Useful script for execute SQL request and execute them online from PHP.
 
 or
 
-`wget https://github.com/asubit/execute-mysql-request-from-php/archive/master.zip
-unzip master.zip`
+```
+wget https://github.com/asubit/execute-mysql-request-from-php/archive/master.zip
+unzip master.zip
+```
 
 ## Web view script
 
