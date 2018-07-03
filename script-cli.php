@@ -78,6 +78,7 @@ foreach ($requests as $k => $q) {
     $rq = mysql_query($q, $con);
     if (!$rq) {
         echo "\033[31m".$t['db_query_error']."\033[0m"."\n";
+        echo "\033[31m".mysql_errno($con) . ": " . mysql_error($con) . "\033[0m" . "\n";
     } else {
         echo "\033[32m".$t['db_query_success']."\033[0m"."\n";
     }
